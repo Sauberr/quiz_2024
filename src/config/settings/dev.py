@@ -1,6 +1,5 @@
 from config.settings.base import *  # noqa
 
-
 DEBUG = True
 
 SECRET_KEY = 'django-secret-key'
