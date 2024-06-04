@@ -8,6 +8,9 @@ from core.models import BaseModel
 class Category(BaseModel):
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class Quiz(models.Model):
     QUESTION_MAX_LIMIT = 20
@@ -25,6 +28,9 @@ class Quiz(models.Model):
         choices=LEVEL_CHOICES.choices, default=LEVEL_CHOICES.BASIC
     )
 
+    def __str__(self):
+        return self.title
+
     def questions_count(self):
         return self.questions.count()
 
@@ -37,6 +43,9 @@ class Result(BaseModel):
     quiz = models.ForeignKey('quiz.Quiz', related_name='results', on_delete=models.CASCADE)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.quiz.title} - {self.user.email}'
+
 
 class Question(BaseModel):
     quiz = models.ForeignKey('quiz.Quiz', related_name='questions', on_delete=models.CASCADE)
@@ -44,11 +53,17 @@ class Question(BaseModel):
                                                                 MinValueValidator(Quiz.QUESTION_MIN_LIMIT)])
     text = models.TextField(max_length=1024)
 
+    def __str__(self):
+        return f'{self.quiz.title} - {self.order_number}'
+
 
 class Choice(BaseModel):
     question = models.ForeignKey('quiz.Question', related_name='choices', on_delete=models.CASCADE)
     text = models.CharField(max_length=255)
     is_correct = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.question.text} - {self.text}'
 
 
 
