@@ -22,4 +22,3 @@ class QuestionDetailView(RetrieveAPIView):
 class QuizListView(ListAPIView):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
-

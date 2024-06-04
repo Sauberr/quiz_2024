@@ -4,6 +4,7 @@ from django.db.models import Manager
 
 class CustomerManager(BaseUserManager):
     use_in_migrations = True
+
     def _create_user(self, email, password, **extra_fields):
         """
         Create and save a user with the given email and password.
@@ -36,4 +37,3 @@ class CustomerManager(BaseUserManager):
 class PeopleManager(Manager):
     def get_staff_users(self):
         return super().get_queryset().filter(is_staff=True)
-

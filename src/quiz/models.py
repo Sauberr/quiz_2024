@@ -15,6 +15,7 @@ class Category(BaseModel):
 class Quiz(models.Model):
     QUESTION_MAX_LIMIT = 20
     QUESTION_MIN_LIMIT = 3
+
     class LEVEL_CHOICES(models.IntegerChoices):
         BASIC = 0, 'Basic',
         MIDDLE = 1, 'Middle',
@@ -64,6 +65,3 @@ class Choice(BaseModel):
 
     def __str__(self):
         return f'{self.question.text} - {self.text}'
-
-
-
