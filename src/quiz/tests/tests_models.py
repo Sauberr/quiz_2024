@@ -23,3 +23,19 @@ class TestQuizModel(TestCase):
             sample_quiz(title="A" * 7000)
 
         self.assertEqual(Quiz.objects.count(), 1)
+
+    def test_title(self):
+        self.assertEqual(self.test_quiz.title, 'Test_Quiz')
+
+    def test_description_limit(self):
+        with self.assertRaises(ValidationError):
+            sample_quiz(title='A', description='T' * 20000)
+
+        self.assertEqual(Quiz.objects.count(), 1)
+
+    def test_text_limit(self):
+        with self.assertRaises(ValidationError):
+            sample_question(quiz=self.test_quiz, order_number=1, text='A' * 20000)
+
+        self.assertEqual(self.test_quiz.questions.count(), self.question_count)
+
