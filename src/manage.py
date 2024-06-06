@@ -7,9 +7,9 @@ from pathlib import Path
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.dev')
-    if sys.argv[1] == 'test':
-        print('NOTE: Running black formatter')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.dev")
+    if sys.argv[1] == "test":
+        print("NOTE: Running black formatter")
         print(os.popen(f"black --config {Path(__file__).resolve().parent.parent}/.black.toml .").read())
         print(os.popen("isort .").read())
         print(os.popen("flake8 .").read())
@@ -24,5 +24,5 @@ def main():
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
