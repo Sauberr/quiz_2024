@@ -3,7 +3,9 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions, routers
 
-from api.views import CustomerViewSet, QuestionDetailView, QuizListView
+from api.views import (CategoryCreateView, CategoryDeleteView,
+                       CategoryListView, CategoryUpdateView, CustomerViewSet,
+                       QuestionDetailView, QuizListView)
 
 app_name = "api"
 
@@ -31,4 +33,8 @@ urlpatterns = [
     path("qiuz/", QuizListView.as_view(), name="quiz_list"),
     path("auth/", include("djoser.urls.jwt")),
     path("docs/", schema_view.with_ui("swagger", cache_timeout=0), name="swagger_docs"),
+    path("category/create/", CategoryCreateView.as_view(), name="category_create"),
+    path("category/delete/", CategoryDeleteView.as_view(), name="category_delete"),
+    path("category/update/", CategoryUpdateView.as_view(), name="category_update"),
+    path("category/list/", CategoryListView.as_view(), name="category_list"),
 ]

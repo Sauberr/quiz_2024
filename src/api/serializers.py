@@ -1,7 +1,7 @@
 from rest_framework.serializers import CharField, ModelSerializer
 
 from account.models import Customer
-from quiz.models import Choice, Question, Quiz
+from quiz.models import Category, Choice, Question, Quiz
 
 
 class CustomerSerializer(ModelSerializer):
@@ -49,4 +49,13 @@ class QuizSerializer(ModelSerializer):
             "description",
             "level",
             "questions_count",
+        )
+
+
+class CategorySerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = (
+            "id",
+            "name",
         )

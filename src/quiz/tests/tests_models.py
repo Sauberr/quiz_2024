@@ -26,3 +26,9 @@ class TestQuizModel(TestCase):
 
     def test_title(self):
         self.assertEqual(self.test_quiz.title, "Test_Quiz")
+
+    def test_level(self):
+        self.assertEqual(self.test_quiz.level, 0)
+
+    def test_str(self):
+        self.assertEqual(str(self.test_quiz), "Test_Quiz")

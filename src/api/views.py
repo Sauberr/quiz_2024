@@ -1,12 +1,14 @@
 from django.contrib.auth import get_user_model
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import (CreateAPIView, DestroyAPIView,
+                                     ListAPIView, RetrieveAPIView,
+                                     UpdateAPIView)
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ModelViewSet
 
-from api.serializers import (CustomerSerializer, QuestionSerializer,
-                             QuizSerializer)
+from api.serializers import (CategorySerializer, CustomerSerializer,
+                             QuestionSerializer, QuizSerializer)
 from core.permission import IsSuperUser
-from quiz.models import Question, Quiz
+from quiz.models import Category, Question, Quiz
 
 
 class CustomerViewSet(ModelViewSet):
@@ -25,3 +27,27 @@ class QuizListView(ListAPIView):
     permission_classes = [AllowAny | IsSuperUser]
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
+
+
+class CategoryCreateView(CreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsSuperUser]
+
+
+class CategoryDeleteView(DestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsSuperUser]
+
+
+class CategoryUpdateView(UpdateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsSuperUser]
+
+
+class CategoryListView(ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [AllowAny | IsSuperUser]
