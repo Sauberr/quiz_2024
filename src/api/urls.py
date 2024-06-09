@@ -34,7 +34,7 @@ urlpatterns = [
     path("auth/", include("djoser.urls.jwt")),
     path("docs/", schema_view.with_ui("swagger", cache_timeout=0), name="swagger_docs"),
     path("category/create/", CategoryCreateView.as_view(), name="category_create"),
-    path("category/delete/", CategoryDeleteView.as_view(), name="category_delete"),
-    path("category/update/", CategoryUpdateView.as_view(), name="category_update"),
+    path("category/delete/<int:pk>/", CategoryDeleteView.as_view(), name="category_delete"),
+    path("category/update/<int:pk>/", CategoryUpdateView.as_view(), name="category_update"),
     path("category/list/", CategoryListView.as_view(), name="category_list"),
 ]

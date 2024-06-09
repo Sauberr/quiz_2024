@@ -37,12 +37,14 @@ class CategoryCreateView(CreateAPIView):
 
 class CategoryDeleteView(DestroyAPIView):
     queryset = Category.objects.all()
+    lookup_field = "pk"
     serializer_class = CategorySerializer
     permission_classes = [IsSuperUser]
 
 
 class CategoryUpdateView(UpdateAPIView):
     queryset = Category.objects.all()
+    lookup_field = "pk"
     serializer_class = CategorySerializer
     permission_classes = [IsSuperUser]
 
