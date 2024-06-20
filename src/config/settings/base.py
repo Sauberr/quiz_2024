@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "core",
     "account",
     "quiz",
+    "blog",
     "api",
     "djoser",
     "drf_yasg",

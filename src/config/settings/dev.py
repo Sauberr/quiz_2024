@@ -22,6 +22,7 @@ if os.environ.get("GITHUB_WORKFLOW"):
             "PORT": 5432,
         }
     }
+
 else:
     DATABASES = {
         "default_local": {

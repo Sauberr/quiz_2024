@@ -26,6 +26,31 @@ services:
     env_file:
       - .env
 
+  mongodb:
+    image: mongo:3-stretch
+    container_name: mongo_container
+    ports:
+      - 27017:27017
+    command: ["--bind_ip_all", "--smallfiles"]
+    volumes:
+      - mongodb_data:/data/db
+    env_file:
+      - .env
+    restart: on-failure
+
+  mongoadmin:
+    image: mongo-express
+    restart: always
+    container_name: mongo_admin_container
+    ports:
+      - 8091:8081
+    env_file:
+      - .env
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4
@@ -41,5 +66,6 @@ services:
 
 
 volumes:
+  mongodb_data: { }
   pg_data: { }
   pgadmin_data: { }
