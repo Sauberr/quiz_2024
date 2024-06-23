@@ -1,12 +1,12 @@
+from django.contrib.auth import get_user_model
 from rest_framework.serializers import CharField, ModelSerializer
 
-from account.models import Customer
 from quiz.models import Category, Choice, Question, Quiz
 
 
 class CustomerSerializer(ModelSerializer):
     class Meta:
-        model = Customer
+        model = get_user_model()
         fields = (
             "first_name",
             "last_name",

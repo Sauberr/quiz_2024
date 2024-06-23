@@ -1,21 +1,24 @@
 version: "3"
 
+
 services:
   backend:
     build: ./
     container_name: quiz_container
     working_dir: /quiz
     command:
-      - ./commands/start_server.sh
+      - ./commands/start_server_${MODE}.sh
     ports:
       - 8010:8000
     volumes:
       - ./src:/quiz/src
       - ./commands:/quiz/commands
+      - static_content:/quiz/src/static
+      - media_content:/quiz/src/media
     env_file:
       - .env
     depends_on:
-        - postgres
+      - postgres
 
   postgres:
     image: postgres:15
@@ -64,8 +67,24 @@ services:
     depends_on:
       - postgres
 
+  nginx:
+    image: nginx:1.19
+    volumes:
+      - static_content:/quiz/src/static
+      - media_content:/quiz/src/media
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - 80:80
+      - 443:443
+    env_file:
+      - .env
+    depends_on:
+      - backend
+
 
 volumes:
+  static_content: { }
+  media_content: { }
   mongodb_data: { }
   pg_data: { }
   pgadmin_data: { }
